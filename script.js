@@ -3,7 +3,7 @@ var generateBtn = document.querySelector("#generate");
 // add event listener
 generateBtn.addEventListener("click", writePassword);
 
-// create password and input password
+// write password
 
 function writePassword() {
     var password = generatePassword ();
@@ -12,35 +12,26 @@ function writePassword() {
     passwordText.value = password;
 }
 
+
+// my allowed characters
 var upperChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var lowerChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var specialChar = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`"];
 var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     
-var upperChartypes = false;
-var lowerChartypes = false;
-var specialChartypes = false;
-var numbertypes = false;
+// empty arrays
+var passwordArray = [];
+var userConfirm = [];
 
-function generatePassword() {
-  var confirmCharlength = parseInt(
-    prompt("How long should the password be?"));
+// character amount
+if (characterNumber >= 8 && characterNumber <= 128) {
+    password = userCharacters();
+} else {
+    alert("Invalid password. Please make sure to use 8 or more characters.");
+    generatePassword();
+}
 
-    if (confirmCharlength < 8) {
-        alert("At least 8 characters long")
-        return null;
-    }
-
-    if (confirmCharlength > 128) {
-        alert("Less than 129 characters")
-        return null;
-    }
-
-    if (!Number.isInteger(confirmCharlength)) {
-        alert("Password length provided as number");
-        return null;
-    }
-
+function userCharacters() {
     var lowerCase=confirm("Include lowercase characters?");
     if (lowerCase == true) {
         lowerChartypes = true;
@@ -61,33 +52,26 @@ function generatePassword() {
         numbers = true;
     } 
     
-    if (upperChartypes  === false && lowerChartypes === false && specialChartypes === false && numbertypes === false) {
-        alert("Password must include uppercase character, lowercase character, sprecial chracter, and a number.")
+    if (!upperChartypes && !lowerChartypes && !specialChartypes && !numbertypes) {
+        alert("Password must include uppercase character, lowercase character, special chracter, and a number.");
+        userCharacters();
     }
-    var options={
-        lower: lowerChartypes,
-        upper: upperChartypes,
-        special: specialChartypes,
-        number: numbers,
-    } 
-    console.log(options)
+// loop to generate random characters for passwords
+    var passwordArrayLength = passwordArray.length;
 
-    if (lowerChartypes == true) {
-        var x = Math.floor((Math.random() * lowerChar.length-1));
-        var lower = lowerChar[x];
-        console.log(lower)
-    } 
-}
+    for (i = passwordArrayLength; i < numberOfCharacters; i++) {
+      passwordArray.push (userConfirm[Math.floor(Math.random() * userConfirm.length)]);
+    }
 
-var generateBtn = document.querySelector("#generate");
+    var finalPassword = ""
+    for(f = 0; f < numberOfCharacters; f++) {
+      finalPassword = finalPassword + passwordArray[Math.floor(Math.random() * passwordArray.length)]
+    }
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+    console.log(finalPassword);
+    return finalPassword;
+  }
 
-  passwordText.value = password;
+  return password;
 
 }
-
-generateBtn.addEventListener("click", writePassword);
