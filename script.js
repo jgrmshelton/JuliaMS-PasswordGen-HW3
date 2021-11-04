@@ -1,3 +1,17 @@
+var generateBtn = document.querySelector("#generate");
+
+// add event listener
+generateBtn.addEventListener("click", writePassword);
+
+// create password and input password
+
+function writePassword() {
+    var password = generatePassword ();
+    var passwordText = document.querySelector("#password");
+
+    passwordText.value = password;
+}
+
 var upperChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var lowerChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var specialChar = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`"];
